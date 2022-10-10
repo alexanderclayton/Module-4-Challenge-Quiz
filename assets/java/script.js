@@ -11,6 +11,7 @@ var submitCard = document.getElementById("submit-card");
 var questionCard = document.getElementById("question-card");
 
 
+
 var questions = [
     {
         questionText: "filler questionText 1",
@@ -18,35 +19,35 @@ var questions = [
         optionB: "filler option B",
         optionC: "filler option C",
         optionD: "filler option D",
-        answer: "a"
+        answer: "option-a"
     },{
         questionText: "filler questionText 2",
         optionA: "filler option A",
         optionB: "filler test option B",
         optionC: "filler option C",
         optionD: "filler option D",
-        answer: "b"
+        answer: "option-b"
     },{
         questionText: "filler questionText 3",
         optionA: "filler option A",
         optionB: "filler option B",
         optionC: "filler test option C",
         optionD: "filler option D",
-        answer: "c"
+        answer: "option-c"
     },{
         questionText: "filler questionText 4",
         optionA: "filler option A",
         optionB: "filler option B",
         optionC: "filler option C",
         optionD: "filler test option D",
-        answer: "d"
+        answer: "option-d"
     },{
         questionText: "filler questionText 5",
         optionA: "filler test option A",
         optionB: "filler option B",
         optionC: "filler option C",
         optionD: "filler option D",
-        answer: "a"
+        answer: "option-a"
     }
 ];
 
@@ -76,7 +77,7 @@ function startQuiz() {
 }
 
 function nextQuestion() {
-
+    
     if(currentQuestion < previousQuestion) {
         currentQuestion++;
         displayQuestion();
@@ -84,7 +85,7 @@ function nextQuestion() {
     for (var i = 0; i < answerButton.length; i++) {
         answerButton[i].addEventListener("click", nextQuestion)
     };
-    console.log(currentQuestion);
+    
     } else {
         resultsScreen();
     }
@@ -103,4 +104,15 @@ function toMain() {
     questionCard.style.display = "none";
     introCard.style.display = "block";
     currentQuestion = 0;
+}
+
+var score = 0;
+
+function calculateScore() {
+    if (correct !== questions[currentQuestion].answer) {
+        score++;
+        console.log(score);
+    } else {
+        console.log(score);
+    }
 }
