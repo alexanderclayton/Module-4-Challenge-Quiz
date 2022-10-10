@@ -1,4 +1,4 @@
-var box1 = document.getElementById("box1");
+var introCard = document.getElementById("intro-card");
 var start = document.getElementById("start-button");
 var questionText = document.getElementById("question-text");
 var questionOptions = document.getElementById("question-options");
@@ -7,6 +7,9 @@ var optionB = document.getElementById("option-b");
 var optionC = document.getElementById("option-c");
 var optionD = document.getElementById("option-d");
 var check = document.getElementById("check");
+var submitCard = document.getElementById("submit-card");
+var questionCard = document.getElementById("question-card");
+
 
 var questions = [
     {
@@ -19,7 +22,7 @@ var questions = [
     },{
         questionText: "filler questionText 2",
         optionA: "filler option A",
-        optionB: "filler option B",
+        optionB: "filler test option B",
         optionC: "filler option C",
         optionD: "filler option D",
         answer: "b"
@@ -27,7 +30,7 @@ var questions = [
         questionText: "filler questionText 3",
         optionA: "filler option A",
         optionB: "filler option B",
-        optionC: "filler option C",
+        optionC: "filler test option C",
         optionD: "filler option D",
         answer: "c"
     },{
@@ -35,11 +38,11 @@ var questions = [
         optionA: "filler option A",
         optionB: "filler option B",
         optionC: "filler option C",
-        optionD: "filler option D",
+        optionD: "filler test option D",
         answer: "d"
     },{
         questionText: "filler questionText 5",
-        optionA: "filler option A",
+        optionA: "filler test option A",
         optionB: "filler option B",
         optionC: "filler option C",
         optionD: "filler option D",
@@ -63,7 +66,8 @@ function displayQuestion() {
 start.addEventListener("click", startQuiz);
 
 function startQuiz() {
-    box1.style.display = "none";
+    introCard.style.display = "none";
+    questionCard.style.display = "block";
     displayQuestion();
     var answerButton = document.getElementsByClassName("answer-button");
     for (var i = 0; i < answerButton.length; i++) {
@@ -72,7 +76,7 @@ function startQuiz() {
 }
 
 function nextQuestion() {
-    box1.style.display = "none";
+
     if(currentQuestion < previousQuestion) {
         currentQuestion++;
         displayQuestion();
@@ -82,7 +86,21 @@ function nextQuestion() {
     };
     console.log(currentQuestion);
     } else {
-        return;
+        resultsScreen();
     }
 
+}
+
+function resultsScreen() {
+    submitCard.style.display = "block";
+    questionCard.style.display = "none";
+    var submitResults = document.getElementById("submit-score");
+    submitResults.addEventListener("click", toMain);
+}
+
+function toMain() {
+    submitCard.style.display = "none";
+    questionCard.style.display = "none";
+    introCard.style.display = "block";
+    currentQuestion = 0;
 }
