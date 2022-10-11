@@ -19,14 +19,14 @@ var questions = [
         optionB: "filler option B",
         optionC: "filler option C",
         optionD: "filler option D",
-        answer: "option-a"
+        answer: "A"
     },{
         questionText: "filler questionText 2",
         optionA: "<button>filler option a</button>",
         optionB: "filler test option B",
         optionC: "filler option C",
         optionD: "filler option D",
-        answer: "option-b"
+        answer: "B"
     },{
         questionText: "filler questionText 3",
         optionA: "filler option A",
