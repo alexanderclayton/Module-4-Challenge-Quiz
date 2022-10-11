@@ -1,5 +1,5 @@
 var highScoresLink = document.getElementById("high-scores-link");
-var timer = document.getElementById("timer");
+var timer = document.getElementById("timer")
 var introCard = document.getElementById("intro-card");
 var startButton = document.getElementById("start-button");
 var questionCard = document.getElementById("question-card")
@@ -57,9 +57,6 @@ var questions = [
     }
 ];
 
-//var answerKey = [0, 1, 2, 3, 0]; DO I NEED THIS?
-
-
 var score = 0;
 var currentQuestion = 0;
 var questionCount = questions.length -1;
@@ -76,25 +73,27 @@ function startQuiz() {
    introCard.style.display = "none";
    questionCard.style.display = "block";
    timer.style.display = "block";
+   check.style.display = "none";
    countDown();
    displayQuestion();
    
 };
 
 //issues clearing interval??
-
+var secondsLeft = 60;
+var timeLeft = 60;
+var trackEndGame = 0;
 function countDown() {
-    var secondsLeft = 60;
-    var timerInterval = setInterval(function() {
-        secondsLeft--;
-        timer.innerHTML = secondsLeft;
-
-        if(secondsLeft === 0) {
-            clearInterval(timerInterval);
+    timer.innerHTML = timeLeft;
+    secondsLeft = setInterval(function() {
+        timeLeft--;
+        timer.innerHTML = timeLeft;
+        if (timeLeft === 0 && trackEndGame === 0) {
+            clearInterval(secondsLeft);
             enterInitials();
         }
-    }, 1000)
-}
+    }, 1000);
+ };
 
 function displayQuestion() {
     var thisQuestion = questions[currentQuestion];
@@ -107,10 +106,15 @@ function displayQuestion() {
 
 function checkAnswer(event) {
     //took SO long to get this!!  Event target!!
+    check.style.display = "block";
     var thisQuestion = questions[currentQuestion];
     if (event.target.id == thisQuestion.answer) {
         score++;
-    };
+        check.innerHTML = "Correct!"
+    } else {
+        timeLeft = timeLeft - 10;
+        check.innerHTML = "Incorrect!"
+    }
     nextQuestion()
 };
 
@@ -130,6 +134,7 @@ function enterInitials() {
     submitCard.style.display = "block";
     highScoreCard.style.display = "none";
     var scorePercent = ((score / 5) * 100)
+    trackEndGame = 1;
     finalScore.innerHTML = "You finished with a score of " + scorePercent + "%!";
     
 };
@@ -140,7 +145,7 @@ function viewScores() {
     submitCard.style.display = "none";
     highScoreCard.style.display = "block";
     
-}
+};
 
 function returnHome () {
     timer.style.display = "none";
@@ -148,13 +153,4 @@ function returnHome () {
     questionCard.style.display = "none";
     submitCard.style.display = "none";
     highScoreCard.style.display = "none";
-}
-
-
-/*function nextQuestion() {
-    if (userAnswer[i] === answerKey[i]) {
-        console.log("hi")
-    } else {
-        console.log("bye")
-    };
-}; */
+};
