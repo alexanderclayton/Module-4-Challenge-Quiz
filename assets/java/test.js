@@ -17,6 +17,12 @@ var highScoreCard = document.getElementById("high-score-card");
 var highScores = document.getElementById("high-scores");
 var resetButton = document.getElementById("reset-button");
 var returnToHomeButton = document.getElementById("return-to-home-button");
+var questionCardCard = document.getElementById("question-card-card");
+var submitCardCard = document.getElementById("submit-card-card");
+var highScoreCardCard = document.getElementById("high-score-card-card");
+var introCardCard = document.getElementById("intro-card-card");
+var timerCard = document.getElementById("timer-card");
+var submitText = document.getAnimations("submit-text");
 
 var questions = [
     {
@@ -70,9 +76,9 @@ submitScore.addEventListener("click", viewScores);
 returnToHomeButton.addEventListener("click", returnHome)
 
 function startQuiz() {
-   introCard.style.display = "none";
-   questionCard.style.display = "block";
-   timer.style.display = "block";
+   introCardCard.style.display = "none";
+   questionCardCard.style.display = "block";
+   timerCard.style.display = "block";
    check.style.display = "none";
    countDown();
    displayQuestion();
@@ -84,13 +90,13 @@ var secondsLeft = 60;
 var timeLeft = 60;
 var trackEndGame = 0;
 function countDown() {
-    timer.innerHTML = timeLeft;
+    timer.innerHTML = "Time Left: " + timeLeft;
     secondsLeft = setInterval(function() {
         timeLeft--;
-        timer.innerHTML = timeLeft;
-        if (timeLeft === 0 && trackEndGame === 0) {
+        timer.innerHTML = "Time Left: " + timeLeft;
+        if (timeLeft <= 0) {
             clearInterval(secondsLeft);
-            enterInitials();
+            timesUp();
         }
     }, 1000);
  };
@@ -128,29 +134,42 @@ function nextQuestion() {
 };
 
 function enterInitials() {
-    timer.style.display = "none";
-    introCard.style.display = "none";
-    questionCard.style.display = "none";
-    submitCard.style.display = "block";
-    highScoreCard.style.display = "none";
+    timerCard.style.display = "none";
+    introCardCard.style.display = "none";
+    questionCardCard.style.display = "none";
+    submitCardCard.style.display = "block";
+    highScoreCardCard.style.display = "none";
     var scorePercent = ((score / 5) * 100)
     trackEndGame = 1;
+    submitText.innerHTML = "All Done!"
     finalScore.innerHTML = "You finished with a score of " + scorePercent + "%!";
     
 };
 
+function timesUp() {
+    timerCard.style.display = "none";
+    introCardCard.style.display = "none";
+    questionCardCard.style.display = "none";
+    submitCardCard.style.display = "block";
+    highScoreCardCard.style.display = "none";
+    var scorePercent = ((score / 5) * 100)
+    trackEndGame = 1;
+    submitText.innerHTML = "Time's Up!"
+    finalScore.innerHTML = "You finished with a score of " + scorePercent + "%!";
+}
+
 function viewScores() {
-    introCard.style.display = "none";
-    questionCard.style.display = "none";
-    submitCard.style.display = "none";
-    highScoreCard.style.display = "block";
+    introCardCard.style.display = "none";
+    questionCardCard.style.display = "none";
+    submitCardCard.style.display = "none";
+    highScoreCardCard.style.display = "block";
     
 };
 
 function returnHome () {
-    timer.style.display = "none";
-    introCard.style.display = "block";
-    questionCard.style.display = "none";
-    submitCard.style.display = "none";
-    highScoreCard.style.display = "none";
+    timerCard.style.display = "none";
+    introCardCard.style.display = "block";
+    questionCardCard.style.display = "none";
+    submitCardCard.style.display = "none";
+    highScoreCardCard.style.display = "none";
 };

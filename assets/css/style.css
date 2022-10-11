@@ -1,3 +1,208 @@
+:root {
+    --blue: rgb(37, 37, 230);
+    --pink: rgb(146, 13, 95);
+    --black: black;
+    --white: white;
+    --grey: grey;
+
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+body {
+    background-color: var(--blue);
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+}
+
+#timer {
+    border: solid;
+    border-radius: .5rem;
+    border-color: var(--black);
+    background-color: var(--pink);
+    width: 250px;
+    font-size: 2rem;
+    margin-right: 2rem;
+}
+
+#high-scores-link {
+    border: solid;
+    border-radius: .5rem;
+    border-color: var(--black);
+    background-color: var(--pink);
+    width: 250px;
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+#high-scores-link:hover {
+    cursor: pointer;
+    color: var(--white);
+}
+
+main {
+    height: 50rem;
+    position: relative;
+}
+
+#intro-card-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#intro-card {
+    position: absolute;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 13.5%;
+    border: solid;
+    border-radius: 2rem;
+    border-color: var(--black);
+    background-color: var(--pink);
+    height: 35%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+}
+
+#start-button {
+    height: 20%;
+    width: 40%;
+    font-weight: bold
+}
+
+#start-button:hover {
+    cursor: pointer;
+    background-color: var(--grey);
+}
+
+#question-card-card {
+    width: 100%;
+    height: 100%;
+    position: relative;  
+}
+
+#question-card {
+    position: absolute;
+    margin-left: 25%;
+    margin-right:25%;
+    margin-top: 13.5%;
+    border: solid;
+    border-radius: 2rem;
+    border-color: var(--black);
+    background-color: var(--pink);
+    height: 35%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+}
+
+#question-card p {
+    font-size: 1.5rem;
+}
+
+#question-card div {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+#question-card button {
+    width: 100%;
+}
+
+#question-card button:hover {
+    cursor: pointer;
+    background-color: var(--grey);
+}
+
+#submit-card-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#submit-card {
+    position: absolute;
+    margin-left: 25%;
+    margin-right:25%;
+    margin-top: 13.5%;
+    border: solid;
+    border-radius: 2rem;
+    border-color: var(--black);
+    background-color: var(--pink);
+    height: 35%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+    font-size: 1.5rem;
+}
+
+#submit-card input {
+    width: 50%;
+}
+
+#submit-card button {
+    width: 50%;
+    height: 20%;
+}
+
+#submit-card button:hover {
+    cursor: pointer;
+    background-color: var(--grey);
+}
+#high-score-card-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#high-score-card {
+    position: absolute;
+    margin-left: 25%;
+    margin-right:25%;
+    margin-top: 13.5%;
+    border: solid;
+    border-radius: 2rem;
+    border-color: var(--black);
+    background-color: var(--pink);
+    height: 35%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem;
+}
+#high-score-card-buttons {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+}
+#high-score-card button {
+    width: 25%;
+    height: 100%;
+}
 .hide {
     display: none;
 }
