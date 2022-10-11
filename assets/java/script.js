@@ -14,7 +14,7 @@ var questionCard = document.getElementById("question-card");
 
 var questions = [
     {
-        questionText: "filler questionText 1",
+        questionText: "<p>filler questionText 1</p>",
         optionA: "filler option A",
         optionB: "filler option B",
         optionC: "filler option C",
@@ -22,7 +22,7 @@ var questions = [
         answer: "option-a"
     },{
         questionText: "filler questionText 2",
-        optionA: "filler option A",
+        optionA: "<button>filler option a</button>",
         optionB: "filler test option B",
         optionC: "filler option C",
         optionD: "filler option D",
@@ -116,3 +116,19 @@ function calculateScore() {
         console.log(score);
     }
 }
+
+/* var introCard = document.getElementById("intro-card");
+var startButton = document.getElementById("start-button");
+var questionCard = document.getElementById("question-card")
+var questionText = document.getElementById("question-text");
+var questionOptions = document.getElementById("question-options");
+var optionA = document.getElementById("option-a");
+var optionB = document.getElementById("option-b");
+var optionC = document.getElementById("option-c");
+var optionD = document.getElementById("option-d");
+var check = document.getElementById("check-answer");
+var submitCard = document.getElementById("submit-card");
+var highScoreCard = document.getElementById("high-score-card");
+var highScores = document.getElementById("high-scores");
+var resetButton = document.getElementById("reset-button");
+var returnToHomeButton = document.getElementById("return-to-home-button");
