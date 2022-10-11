@@ -22,43 +22,44 @@ var submitCardCard = document.getElementById("submit-card-card");
 var highScoreCardCard = document.getElementById("high-score-card-card");
 var introCardCard = document.getElementById("intro-card-card");
 var timerCard = document.getElementById("timer-card");
-var submitText = document.getAnimations("submit-text");
+var submitText = document.getElementById("submit-text");
+var storeInitials = document.getElementById("initials")
 
 var questions = [
     {
-        questionText: "<p>filler questionText 1</p>",
-        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>A</button>",
-        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>filler option B</button>",
-        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>filler option C</button>",
-        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>filler option D</button>",
+        questionText: "<p>What does HTML stand for?</p>",
+        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>Hyper Text Markup Language</button>",
+        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>How To Make Lasagna</button>",
+        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>Hold This, My Love <3</button>",
+        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>Has The Microwave Leaked?</button>",
         answer: "A"
     },{
-        questionText: "<p>filler questionText 2</p>",
-        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>filler option A</button>",
-        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>filler test option B</button>",
-        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>filler option C</button>",
-        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>filler option D</button>",
+        questionText: "<p>What does CSS Stand for</p>",
+        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>Cold Simmer Sauce</button>",
+        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>Cascading Style Sheets</button>",
+        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>Crocodiles, Snakes, & Sharks</button>",
+        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>Can Seashells Swim?</button>",
         answer: "B"
     },{
-        questionText: "<p>filler questionText 3</p>",
-        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>filler option A</button>",
-        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>filler option B</button>",
-        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>filler test option C</button>",
-        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>filler option D</button>",
+        questionText: "<p>Javascript _________?</p>",
+        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>adds content on the webpage</button>",
+        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>adds styling to the webpage</button>",
+        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>adds interactivity to the webpage</button>",
+        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>adds secrets to the webpage</button>",
         answer: "C"
     },{
-        questionText: "<p>filler questionText 4</p>",
-        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>filler option A</button>",
-        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>filler option B</button>",
-        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>filler option C</button>",
-        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>filler test option D</button>",
+        questionText: "<p>CSS files are linked in what part of the HTML file.</p>",
+        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>header</button>",
+        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>main</button>",
+        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>footer</button>",
+        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>head</button>",
         answer: "D"
     },{
-        questionText: "<p>filler questionText 5</p>",
-        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>filler test option A</button>",
-        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>filler option B</button>",
-        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>filler option C</button>",
-        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>filler option D</button>",
+        questionText: "<p>JavaScript can be fun</p>",
+        optionA: "<button class='answer-button' id='A' onclick='checkAnswer(event)'>Yes</button>",
+        optionB: "<button class='answer-button' id='B' onclick='checkAnswer(event)'>No</button>",
+        optionC: "<button class='answer-button' id='C' onclick='checkAnswer(event)'>No!</button>",
+        optionD: "<button class='answer-button' id='D' onclick='checkAnswer(event)'>NOOOOOOO!!!!!!</button>",
         answer: "A"
     }
 ];
@@ -85,17 +86,17 @@ function startQuiz() {
    
 };
 
-//issues clearing interval??
+//issues clearing interval?? Timer keeps running into next quiz...
 var secondsLeft = 60;
 var timeLeft = 60;
 var trackEndGame = 0;
 function countDown() {
     timer.innerHTML = "Time Left: " + timeLeft;
-    secondsLeft = setInterval(function() {
+    secondsLeft = setTimeout(function() {
         timeLeft--;
         timer.innerHTML = "Time Left: " + timeLeft;
-        if (timeLeft <= 0) {
-            clearInterval(secondsLeft);
+        if (timeLeft <= 0 || trackEndGame === 1) {
+            clearTimeout(secondsLeft);
             timesUp();
         }
     }, 1000);
@@ -159,6 +160,13 @@ function timesUp() {
 }
 
 function viewScores() {
+//Keeps saying storeInitials is Null...
+/*    var highScoreData = {
+        initials: storeInitials.value,
+        score: ((score / 5) * 100),
+    };
+    localStorage.setItem("highScoreData", JSON.stringify(highScoreData));
+*/   
     introCardCard.style.display = "none";
     questionCardCard.style.display = "none";
     submitCardCard.style.display = "none";
