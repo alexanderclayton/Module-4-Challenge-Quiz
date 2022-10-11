@@ -10,9 +10,12 @@
 </head>
 <body>
     <header>
-        <nav>
-           <a href="[HIGH-SCORES]">View Highscores</a>
-        </nav>
+        <div>
+           <p id=high-scores-link>View Highscores</p>
+        </div>
+        <div>
+            <p id="timer"></p>
+        </div>
     </header>
     <main>
         <div id="intro-card">
@@ -34,7 +37,7 @@
             <h2>All Done!</h2>
             <div id="final-score"></div>
             <form action="submit">Enter Initials:</form>
-            <input type="text">
+            <input type="initials">
             <button id="submit-score-button">Submit Score</button>
         </div>
          <div class="hide" id="high-score-card">
