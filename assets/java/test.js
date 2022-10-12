@@ -1,20 +1,20 @@
 var highScoresLink = document.getElementById("high-scores-link");
 var timer = document.getElementById("timer")
-var introCard = document.getElementById("intro-card");
+//var introCard = document.getElementById("intro-card");
 var startButton = document.getElementById("start-button");
-var questionCard = document.getElementById("question-card")
+//var questionCard = document.getElementById("question-card")
 var questionText = document.getElementById("question-text");
-var questionOptions = document.getElementById("question-options");
+//var questionOptions = document.getElementById("question-options");
 var optionA = document.getElementById("option-a");
 var optionB = document.getElementById("option-b");
 var optionC = document.getElementById("option-c");
 var optionD = document.getElementById("option-d");
 var check = document.getElementById("check-answer");
 var finalScore = document.getElementById("final-score");
-var submitCard = document.getElementById("submit-card");
+//var submitCard = document.getElementById("submit-card");
 var submitScore = document.getElementById("submit-score-button");
-var highScoreCard = document.getElementById("high-score-card");
-var highScores = document.getElementById("high-scores");
+//var highScoreCard = document.getElementById("high-score-card");
+//var highScores = document.getElementById("high-scores");
 var resetButton = document.getElementById("reset-button");
 var returnToHomeButton = document.getElementById("return-to-home-button");
 var questionCardCard = document.getElementById("question-card-card");
@@ -23,7 +23,9 @@ var highScoreCardCard = document.getElementById("high-score-card-card");
 var introCardCard = document.getElementById("intro-card-card");
 var timerCard = document.getElementById("timer-card");
 var submitText = document.getElementById("submit-text");
-var storeInitials = document.getElementById("initials")
+//var storeInitials = document.getElementById("initials");
+var highScoreList = document.getElementById("high-score-list");
+var li = document.createElement("li");
 
 var questions = [
     {
@@ -67,6 +69,9 @@ var questions = [
 var score = 0;
 var currentQuestion = 0;
 var questionCount = questions.length -1;
+var secondsLeft = 60;
+var timeLeft = 60;
+var trackEndGame = 0;
 
 highScoresLink.addEventListener("click", viewScores);
 
@@ -74,33 +79,9 @@ startButton.addEventListener("click", startQuiz);
 
 submitScore.addEventListener("click", viewScores);
 
-returnToHomeButton.addEventListener("click", returnHome)
+returnToHomeButton.addEventListener("click", returnHome);
 
-function startQuiz() {
-   introCardCard.style.display = "none";
-   questionCardCard.style.display = "block";
-   timerCard.style.display = "block";
-   check.style.display = "none";
-   countDown();
-   displayQuestion();
-   
-};
-
-//issues clearing interval?? Timer keeps running into next quiz...
-var secondsLeft = 60;
-var timeLeft = 60;
-var trackEndGame = 0;
-function countDown() {
-    timer.innerHTML = "Time Left: " + timeLeft;
-    secondsLeft = setTimeout(function() {
-        timeLeft--;
-        timer.innerHTML = "Time Left: " + timeLeft;
-        if (timeLeft <= 0 || trackEndGame === 1) {
-            clearTimeout(secondsLeft);
-            timesUp();
-        }
-    }, 1000);
- };
+resetButton.addEventListener("click", clearStorage);
 
 function displayQuestion() {
     var thisQuestion = questions[currentQuestion];
@@ -109,6 +90,67 @@ function displayQuestion() {
     optionB.innerHTML = thisQuestion.optionB;
     optionC.innerHTML = thisQuestion.optionC;
     optionD.innerHTML = thisQuestion.optionD;
+};
+
+function enterInitials() {
+    timerCard.style.display = "none";
+    introCardCard.style.display = "none";
+    questionCardCard.style.display = "none";
+    submitCardCard.style.display = "block";
+    highScoreCardCard.style.display = "none";
+    var scorePercent = ((score / 5) * 100)
+    submitText.innerHTML = "All Done!"
+    finalScore.innerHTML = "You finished with a score of " + scorePercent + "%!";
+    
+};
+
+function timesUp() {
+    timerCard.style.display = "none";
+    introCardCard.style.display = "none";
+    questionCardCard.style.display = "none";
+    submitCardCard.style.display = "block";
+    highScoreCardCard.style.display = "none";
+    var scorePercent = ((score / 5) * 100)
+    submitText.innerHTML = "Time's Up!"
+    finalScore.innerHTML = "You finished with a score of " + scorePercent + "%!";
+}
+
+function viewScores() {
+    localStorage.setItem("userScore", ((score / 5) * 100));
+    var initialsStore = document.getElementById("initials").value;
+    localStorage.setItem("userInitials", initialsStore);
+    function add() {
+        highScoreList.appendChild(li);
+        li.innerHTML = "<p>" + localStorage.getItem('userInitials') + " " + localStorage.getItem('userScore') + "</p>"
+    };
+    add();
+    introCardCard.style.display = "none";
+    questionCardCard.style.display = "none";
+    submitCardCard.style.display = "none";
+    highScoreCardCard.style.display = "block";
+
+};
+
+function returnHome () {
+    timerCard.style.display = "none";
+    introCardCard.style.display = "block";
+    questionCardCard.style.display = "none";
+    submitCardCard.style.display = "none";
+    highScoreCardCard.style.display = "none";
+    currentQuestion = 0;
+    score = 0;
+    secondsLeft = 60;
+    timeLeft = 60;
+    trackEndGame = 1;
+};
+
+function nextQuestion() {
+    if (currentQuestion >= questionCount) {
+        enterInitials();
+    } else {
+        currentQuestion++;
+        displayQuestion();
+    };
 };
 
 function checkAnswer(event) {
@@ -125,59 +167,46 @@ function checkAnswer(event) {
     nextQuestion()
 };
 
-function nextQuestion() {
-    if (currentQuestion >= questionCount) {
-        enterInitials();
-    } else {
-        currentQuestion++;
-        displayQuestion();
-    };
+function countDown() {
+    timer.innerHTML = "Time Left: " + timeLeft;
+    var timerLeft = setInterval(function() {
+        timeLeft--;
+        timer.innerHTML = "Time Left: " + timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(timerLeft);
+            timesUp();
+        } else if (trackEndGame === 1) {
+            clearInterval(timerLeft);
+            trackEndGame = 0;
+        }
+    }, 1000);
 };
 
-function enterInitials() {
-    timerCard.style.display = "none";
-    introCardCard.style.display = "none";
-    questionCardCard.style.display = "none";
-    submitCardCard.style.display = "block";
-    highScoreCardCard.style.display = "none";
-    var scorePercent = ((score / 5) * 100)
-    trackEndGame = 1;
-    submitText.innerHTML = "All Done!"
-    finalScore.innerHTML = "You finished with a score of " + scorePercent + "%!";
-    
+function startQuiz() {
+   introCardCard.style.display = "none";
+   questionCardCard.style.display = "block";
+   timerCard.style.display = "block";
+   check.style.display = "none";
+   countDown();
+   displayQuestion();
+   
 };
 
-function timesUp() {
-    timerCard.style.display = "none";
-    introCardCard.style.display = "none";
-    questionCardCard.style.display = "none";
-    submitCardCard.style.display = "block";
-    highScoreCardCard.style.display = "none";
-    var scorePercent = ((score / 5) * 100)
-    trackEndGame = 1;
-    submitText.innerHTML = "Time's Up!"
-    finalScore.innerHTML = "You finished with a score of " + scorePercent + "%!";
+
+
+function clearStorage() {
+    localStorage.clear();
+    highScoreList.removeChild(li);
 }
 
-function viewScores() {
-//Keeps saying storeInitials is Null...
-/*    var highScoreData = {
-        initials: storeInitials.value,
-        score: ((score / 5) * 100),
-    };
-    localStorage.setItem("highScoreData", JSON.stringify(highScoreData));
-*/   
-    introCardCard.style.display = "none";
-    questionCardCard.style.display = "none";
-    submitCardCard.style.display = "none";
-    highScoreCardCard.style.display = "block";
-    
-};
 
-function returnHome () {
-    timerCard.style.display = "none";
-    introCardCard.style.display = "block";
-    questionCardCard.style.display = "none";
-    submitCardCard.style.display = "none";
-    highScoreCardCard.style.display = "none";
-};
+
+
+
+
+
+
+
+
+
+//how do I reset everything and start again on the start again click??
