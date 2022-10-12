@@ -35,12 +35,12 @@ The acceptance criteria for this project are as follows:
 
 Full Size desktop view
 
-![full size desktop view](./assets/_C__Users_alexa_Desktop_challenge33_index.html.png)
+![full size desktop view](./assets/images/alexclaytonbootcamp.github.io_Module-4-Challenge-Quiz_.png)
 
 
 ## URL of the Deployed Application:
 
-[Deployed Application](https://alexclaytonbootcamp.github.io/Module-3-Challenge-Passwords/)
+[Deployed Application](https://alexclaytonbootcamp.github.io/Module-4-Challenge-Quiz/)
 
 ## Acknowledgements
 Shoutout to one of the course TAs Joshua Diehl.  He assisted me with some debugging during office hours and took the time to clone my repo to his local machine, look it over, and send me a zipped file with comments/tips.  His returned advice is included in the 2nd half of the test.js file.  I've added initials at the end of each of the comments to indicate which one of us did the commenting.
